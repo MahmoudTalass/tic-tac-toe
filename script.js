@@ -130,7 +130,6 @@ const endGame = (() => {
             spotsLeft++;
          }
       })
-      console.log(spotsLeft)
 
       if (spotsLeft === 0) {
          return true;
@@ -150,6 +149,8 @@ const renderGame = (() => {
    const player2 = Player("O");
 
    const gameBoardContainer = document.querySelector("#gameBoard");
+
+   const matchResult = document.querySelector("#match-result");
 
    function renderGameBoard() {
       for (let i = 0; i < 9; i++) {
@@ -189,7 +190,7 @@ const renderGame = (() => {
       }
       const tie = endGame.tie();
       if (tie) {
-         console.log("tie")
+         matchResult.textContent = "Tie"
       }
    }
 
@@ -211,6 +212,8 @@ const renderGame = (() => {
                return spot;
             }
          });
+
+         matchResult.textContent = `${isGameOver.winningSign} Wins!`
       }
    }
 
