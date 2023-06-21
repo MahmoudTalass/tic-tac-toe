@@ -1,84 +1,98 @@
 * {
-    box-sizing: border-box;
+   box-sizing: border-box;
 
-    --color1: #353535;
-    --color2: #FFF;
-    --color3: #D9D9D9;
-    --color4: #284B63;
-    --color5: #3C6E71;
+   --color1: #353535;
+   --color2: #fff;
+   --color3: #d9d9d9;
+   --color4: #284b63;
+   --color5: #3c6e71;
 }
 
 body {
-    color: var(--color2)
+   color: var(--color2);
 }
-
 
 /* header styling */
 
 .page-header {
-    display: flex;
-    height: 150px;
-    background-color: var(--color1);
-    justify-content: center;
-    align-items: center;
+   display: flex;
+   height: 150px;
+   background-color: var(--color1);
+   justify-content: center;
+   align-items: center;
 }
 
 .page-heading {
-    font-size: 2.5rem;
+   font-size: 2.5rem;
 }
 
 /* main content styling */
 
 .main-content {
-    display: flex;
-    justify-content: center;
+   display: flex;
+   justify-content: center;
+   position: relative;
 }
 
 /* game board styling */
 
 .gameBoard {
-    display: grid;
-    min-width: 300px;
-    height: 300px;
-    margin-top: 4rem;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 1fr);
+   display: grid;
+   min-width: 300px;
+   height: 300px;
+   margin-top: 4rem;
+   grid-template-columns: repeat(3, 1fr);
+   grid-template-rows: repeat(3, 1fr);
 }
 
 .spot {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 2px solid var(--color3);
-    font-size: 1.8rem;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   border: 2px solid var(--color3);
+   font-size: 1.8rem;
 }
 
 .player1 {
-    color: var(--color4)
+   color: var(--color4);
 }
 
 .player2 {
-    color: var(--color5)
+   color: var(--color5);
 }
 
-.spot[data-spot="0"], .spot[data-spot="1"] , .spot[data-spot="2"]{
-    border-top: none
+.won {
+   background-color: aquamarine;
 }
 
-.spot[data-spot="0"], .spot[data-spot="3"], .spot[data-spot="6"] {
-    border-left: none;
+.spot[data-spot="0"],
+.spot[data-spot="1"],
+.spot[data-spot="2"] {
+   border-top: none;
 }
 
-.spot[data-spot="2"], .spot[data-spot="5"], .spot[data-spot="8"] {
-    border-right: none;
+.spot[data-spot="0"],
+.spot[data-spot="3"],
+.spot[data-spot="6"] {
+   border-left: none;
 }
 
-.spot[data-spot="6"], .spot[data-spot="7"], .spot[data-spot="8"] {
-    border-bottom: none;
+.spot[data-spot="2"],
+.spot[data-spot="5"],
+.spot[data-spot="8"] {
+   border-right: none;
 }
 
+.spot[data-spot="6"],
+.spot[data-spot="7"],
+.spot[data-spot="8"] {
+   border-bottom: none;
+}
 
+/* match result styling */
 
-
-
+.match-result {
+    font-size: 3rem;
+    color: black
+}
 
