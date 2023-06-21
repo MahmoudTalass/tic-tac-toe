@@ -123,8 +123,25 @@ const endGame = (() => {
       }
    }
 
+   function tie() {
+      let spotsLeft = 0;
+      gameBoard.gameBoard.forEach(spot => {
+         if (spot === null) {
+            spotsLeft++;
+         }
+      })
+      console.log(spotsLeft)
+
+      if (spotsLeft === 0) {
+         return true;
+      } else {
+         return false;
+      }
+   }
+
    return {
       isGameOver,
+      tie,
    };
 })();
 
@@ -169,6 +186,10 @@ const renderGame = (() => {
       const isGameOver = endGame.isGameOver();
       if (isGameOver !== false) {
          announceWinner(isGameOver);
+      }
+      const tie = endGame.tie();
+      if (tie) {
+         console.log("tie")
       }
    }
 
