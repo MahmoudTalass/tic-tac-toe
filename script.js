@@ -182,6 +182,7 @@ const renderGame = (() => {
             const match1 = spotIndex === isGameOver.winningIndices[0];
             const match2 = spotIndex === isGameOver.winningIndices[1];
             const match3 = spotIndex === isGameOver.winningIndices[2];
+            spot.removeEventListener('click', renderSign)
 
             if (match1 || match2 || match3) {
                console.log(spot);
