@@ -4,6 +4,8 @@
     --color1: #353535;
     --color2: #FFF;
     --color3: #D9D9D9;
+    --color4: #284B63;
+    --color5: #3C6E71;
 }
 
 body {
@@ -48,6 +50,14 @@ body {
     justify-content: center;
     align-items: center;
     border: 2px solid var(--color3);
+}
+
+.player1 {
+    color: var(--color4)
+}
+
+.player2 {
+    color: var(--color5)
 }
 
 .spot[data-spot="0"], .spot[data-spot="1"] , .spot[data-spot="2"]{
