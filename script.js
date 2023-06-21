@@ -1,3 +1,11 @@
+const winningPattern = (patternWon, winningSign, winningIndices) => {
+   return {
+      patternWon,
+      winningSign,
+      winningIndices,
+   };
+};
+
 const gameBoard = (() => {
    let Gameboard = {
       gameBoard: [],
@@ -9,28 +17,114 @@ const gameBoard = (() => {
 })();
 
 const Player = (sign) => {
-   const playerSign = sign
-   let isTurn;
-   if (sign === "X") {
-      isTurn = true;
-   } else {
-      isTurn = false;
-   }
+   const playerSign = sign;
+   let isTurn = { value: null };
 
-   function getIsTurn() {
-      return isTurn;
+   if (sign === "X") {
+      isTurn.value = true;
+   } else {
+      isTurn.value = false;
    }
 
    function toggleTurn() {
-      isTurn = isTurn ? false : true;
+      isTurn.value = !isTurn.value;
    }
 
    return {
       sign: playerSign,
       toggleTurn,
-      getIsTurn,
+      isTurn,
    };
 };
+
+const endGame = (() => {
+   function isGameover() {
+      const winPattern1 = winningPattern(
+         gameBoard.gameBoard[0] === gameBoard.gameBoard[1] &&
+            gameBoard.gameBoard[0] === gameBoard.gameBoard[2] &&
+            gameBoard.gameBoard[0] !== null,
+         gameBoard.gameBoard[0],
+         [0, 1, 2]
+      );
+
+      const winPattern2 = winningPattern(
+         gameBoard.gameBoard[0] === gameBoard.gameBoard[3] &&
+            gameBoard.gameBoard[0] === gameBoard.gameBoard[6] &&
+            gameBoard.gameBoard[0] !== null,
+         gameBoard.gameBoard[0],
+         [0, 3, 6]
+      );
+
+      const winPattern3 = winningPattern(
+         gameBoard.gameBoard[2] === gameBoard.gameBoard[5] &&
+            gameBoard.gameBoard[2] === gameBoard.gameBoard[8] &&
+            gameBoard.gameBoard[2] !== null,
+         gameBoard.gameBoard[2],
+         [2, 5, 8]
+      );
+
+      const winPattern4 = winningPattern(
+         gameBoard.gameBoard[6] === gameBoard.gameBoard[7] &&
+            gameBoard.gameBoard[6] === gameBoard.gameBoard[8] &&
+            gameBoard.gameBoard[6] !== null,
+         gameBoard.gameBoard[6],
+         [6, 7, 8]
+      );
+
+      const winPattern5 = winningPattern(
+         gameBoard.gameBoard[3] === gameBoard.gameBoard[4] &&
+            gameBoard.gameBoard[3] === gameBoard.gameBoard[5] &&
+            gameBoard.gameBoard[3] !== null,
+         gameBoard.gameBoard[3],
+         [3, 4, 5]
+      );
+
+      const winPattern6 = winningPattern(
+         gameBoard.gameBoard[1] === gameBoard.gameBoard[4] &&
+            gameBoard.gameBoard[1] === gameBoard.gameBoard[7] &&
+            gameBoard.gameBoard[1] !== null,
+         gameBoard.gameBoard[1],
+         [1, 4, 7]
+      );
+
+      const winPattern7 = winningPattern(
+         gameBoard.gameBoard[0] === gameBoard.gameBoard[4] &&
+            gameBoard.gameBoard[0] === gameBoard.gameBoard[8] &&
+            gameBoard.gameBoard[0] !== null,
+         gameBoard.gameBoard[0],
+         [0, 4, 8]
+      );
+
+      const winPattern8 = winningPattern(
+         gameBoard.gameBoard[2] === gameBoard.gameBoard[4] &&
+            gameBoard.gameBoard[2] === gameBoard.gameBoard[6] &&
+            gameBoard.gameBoard[2] !== null,
+         gameBoard.gameBoard[2],
+         [2, 4, 6]
+      );
+
+      const winningPatterns = [
+         winPattern1,
+         winPattern2,
+         winPattern3,
+         winPattern4,
+         winPattern5,
+         winPattern6,
+         winPattern7,
+         winPattern8,
+      ];
+
+      let winner = winningPatterns.filter((pattern) => pattern.patternWon);
+
+      if (winner.length !== 0) {
+         return winner[0];
+      }
+   }
+
+   return {
+      isGameover,
+   };
+})();
 
 const renderGame = (() => {
    const player1 = Player("X");
@@ -56,7 +150,7 @@ const renderGame = (() => {
 
       if (gameBoard.gameBoard[currentSpotIndex] !== null) return;
 
-      if (player1.getIsTurn()) {
+      if (player1.isTurn.value) {
          placeSign(currentSpot, currentSpotIndex, player1);
          currentSpot.classList.add("player1");
       } else {
@@ -70,7 +164,17 @@ const renderGame = (() => {
       gameBoard.gameBoard[currentSpotIndex] = player.sign;
       player1.toggleTurn();
       player2.toggleTurn();
+      const isGameOver = endGame.isGameover().patternWon;
+      // announceWinner(currentSpot)
    }
+
+   // function announceWinner(isGameOver) {
+   //    if (isGameOver) {
+
+   //    }
+   // }
+
+
 
    return {
       renderGameBoard,
