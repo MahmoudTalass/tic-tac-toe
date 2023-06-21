@@ -8,18 +8,33 @@ const gameBoard = (() => {
    };
 })();
 
-const Player = (sign) => { 
+const Player = (sign) => {
+   const playerSign = sign
+   let isTurn;
+   if (sign === "X") {
+      isTurn = true;
+   } else {
+      isTurn = false;
+   }
+
+   function getIsTurn() {
+      return isTurn;
+   }
+
+   function toggleTurn() {
+      isTurn = isTurn ? false : true;
+   }
+
    return {
-      sign,
+      sign: playerSign,
+      toggleTurn,
+      getIsTurn,
    };
 };
 
 const renderGame = (() => {
    const player1 = Player("X");
    const player2 = Player("O");
-
-   let player1Turn = true;
-   let player2Turn = false;
 
    const gameBoardContainer = document.querySelector("#gameBoard");
 
@@ -28,7 +43,7 @@ const renderGame = (() => {
          const spot = document.createElement("div");
          spot.textContent = "";
          gameBoard.gameBoard.push(null);
-         spot.setAttribute("data-spot", i)
+         spot.setAttribute("data-spot", i);
          spot.classList.add("spot");
          spot.addEventListener("click", renderSign);
          gameBoardContainer.appendChild(spot);
@@ -37,30 +52,29 @@ const renderGame = (() => {
 
    function renderSign(e) {
       let currentSpot = e.target;
-      let currentSpotIndex = currentSpot.getAttribute("data-spot")
-      console.log(gameBoard.gameBoard)
+      let currentSpotIndex = currentSpot.getAttribute("data-spot");
+
       if (gameBoard.gameBoard[currentSpotIndex] !== null) return;
 
-      if (player1Turn) {
-         currentSpot.textContent = player1.sign;
-         gameBoard.gameBoard[currentSpotIndex] = player1.sign;
-         currentSpot.classList.add("player1")
-         player1Turn = false;
-         player2Turn = true;
+      if (player1.getIsTurn()) {
+         placeSign(currentSpot, currentSpotIndex, player1);
+         currentSpot.classList.add("player1");
       } else {
-         currentSpot.textContent = player2.sign;
-         gameBoard.gameBoard[currentSpotIndex] = player2.sign;
+         placeSign(currentSpot, currentSpotIndex, player2);
          currentSpot.classList.add("player2");
-         player2Turn = false;
-         player1Turn = true;
       }
+   }
+
+   function placeSign(currentSpot, currentSpotIndex, player) {
+      currentSpot.textContent = player.sign;
+      gameBoard.gameBoard[currentSpotIndex] = player.sign;
+      player1.toggleTurn();
+      player2.toggleTurn();
    }
 
    return {
       renderGameBoard,
    };
 })();
-
-
 
 renderGame.renderGameBoard();
