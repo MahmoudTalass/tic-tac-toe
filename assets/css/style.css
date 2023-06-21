@@ -50,19 +50,19 @@ body {
     border: 2px solid var(--color3);
 }
 
-.spot[data-spot="1"], .spot[data-spot="2"] , .spot[data-spot="3"]{
+.spot[data-spot="0"], .spot[data-spot="1"] , .spot[data-spot="2"]{
     border-top: none
 }
 
-.spot[data-spot="1"], .spot[data-spot="4"], .spot[data-spot="7"] {
+.spot[data-spot="0"], .spot[data-spot="3"], .spot[data-spot="6"] {
     border-left: none;
 }
 
-.spot[data-spot="3"], .spot[data-spot="6"], .spot[data-spot="9"] {
+.spot[data-spot="2"], .spot[data-spot="5"], .spot[data-spot="8"] {
     border-right: none;
 }
 
-.spot[data-spot="7"], .spot[data-spot="8"], .spot[data-spot="9"] {
+.spot[data-spot="6"], .spot[data-spot="7"], .spot[data-spot="8"] {
     border-bottom: none;
 }
 
