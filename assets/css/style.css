@@ -1,0 +1,27 @@
+* {
+    box-sizing: border-box;
+
+    --color1: #353535;
+    --color2: #FFF;
+}
+
+body {
+    color: var(--color2)
+}
+
+
+.page-header {
+    display: flex;
+    height: 150px;
+    background-color: var(--color1);
+    justify-content: center;
+    align-items: center;
+}
+
+.page-heading {
+    font-size: 2.5rem;
+}
+
+
+
+
