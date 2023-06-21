@@ -38,7 +38,7 @@ const Player = (sign) => {
 };
 
 const endGame = (() => {
-   function isGameover() {
+   function isGameOver() {
       const winPattern1 = winningPattern(
          gameBoard.gameBoard[0] === gameBoard.gameBoard[1] &&
             gameBoard.gameBoard[0] === gameBoard.gameBoard[2] &&
@@ -118,11 +118,13 @@ const endGame = (() => {
 
       if (winner.length !== 0) {
          return winner[0];
+      } else {
+         return false;
       }
    }
 
    return {
-      isGameover,
+      isGameOver,
    };
 })();
 
@@ -164,17 +166,31 @@ const renderGame = (() => {
       gameBoard.gameBoard[currentSpotIndex] = player.sign;
       player1.toggleTurn();
       player2.toggleTurn();
-      const isGameOver = endGame.isGameover().patternWon;
-      // announceWinner(currentSpot)
+      const isGameOver = endGame.isGameOver();
+      if (isGameOver !== false) {
+         announceWinner(isGameOver);
+      }
    }
 
-   // function announceWinner(isGameOver) {
-   //    if (isGameOver) {
+   function announceWinner(isGameOver) {
+      if (isGameOver.patternWon) {
+         const signsOnBoard = document.getElementsByClassName("spot");
+         const signsOnBoardArr = [...signsOnBoard];
 
-   //    }
-   // }
+         const winningSpots = signsOnBoardArr.filter((spot) => {
+            const spotIndex = parseInt(spot.getAttribute("data-spot"));
+            const match1 = spotIndex === isGameOver.winningIndices[0];
+            const match2 = spotIndex === isGameOver.winningIndices[1];
+            const match3 = spotIndex === isGameOver.winningIndices[2];
 
-
+            if (match1 || match2 || match3) {
+               console.log(spot);
+               spot.classList.add("won");
+               return spot;
+            }
+         });
+      }
+   }
 
    return {
       renderGameBoard,
