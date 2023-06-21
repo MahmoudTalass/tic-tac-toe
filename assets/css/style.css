@@ -3,10 +3,11 @@
 
     --color1: #353535;
     --color2: #FFF;
+    --color3: #D9D9D9;
 }
 
 body {
-    /* color: var(--color2) */
+    color: var(--color2)
 }
 
 
@@ -35,7 +36,6 @@ body {
 
 .gameBoard {
     display: grid;
-    border: 1px solid black;
     min-width: 300px;
     height: 300px;
     margin-top: 4rem;
@@ -47,7 +47,23 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid black;
+    border: 2px solid var(--color3);
+}
+
+.spot[data-spot="1"], .spot[data-spot="2"] , .spot[data-spot="3"]{
+    border-top: none
+}
+
+.spot[data-spot="1"], .spot[data-spot="4"], .spot[data-spot="7"] {
+    border-left: none;
+}
+
+.spot[data-spot="3"], .spot[data-spot="6"], .spot[data-spot="9"] {
+    border-right: none;
+}
+
+.spot[data-spot="7"], .spot[data-spot="8"], .spot[data-spot="9"] {
+    border-bottom: none;
 }
 
 
