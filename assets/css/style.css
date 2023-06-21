@@ -50,6 +50,7 @@ body {
     justify-content: center;
     align-items: center;
     border: 2px solid var(--color3);
+    font-size: 1.8rem;
 }
 
 .player1 {
