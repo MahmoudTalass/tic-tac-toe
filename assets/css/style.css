@@ -6,9 +6,11 @@
 }
 
 body {
-    color: var(--color2)
+    /* color: var(--color2) */
 }
 
+
+/* header styling */
 
 .page-header {
     display: flex;
@@ -21,6 +23,34 @@ body {
 .page-heading {
     font-size: 2.5rem;
 }
+
+/* main content styling */
+
+.main-content {
+    display: flex;
+    justify-content: center;
+}
+
+/* game board styling */
+
+.gameBoard {
+    display: grid;
+    border: 1px solid black;
+    min-width: 300px;
+    height: 300px;
+    margin-top: 4rem;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+}
+
+.spot {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+}
+
+
 
 
 
