@@ -200,7 +200,7 @@ const renderGame = (() => {
          const signsOnBoard = document.getElementsByClassName("spot");
          const signsOnBoardArr = [...signsOnBoard];
 
-         const winningSpots = signsOnBoardArr.filter((spot) => {
+         const winningSpots = signsOnBoardArr.forEach((spot) => {
             const spotIndex = parseInt(spot.getAttribute("data-spot"));
             const match1 = spotIndex === isGameOver.winningIndices[0];
             const match2 = spotIndex === isGameOver.winningIndices[1];
@@ -210,7 +210,6 @@ const renderGame = (() => {
             if (match1 || match2 || match3) {
                console.log(spot);
                spot.classList.add("won");
-               return spot;
             }
          });
          const nameOfWinner =
