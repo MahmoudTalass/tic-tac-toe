@@ -76,6 +76,10 @@ body {
    padding: 1.8rem;
 }
 
+.invalid {
+   border-bottom-color: red;
+}
+
 .player-name-input::placeholder {
    color: var(--color3);
 }
