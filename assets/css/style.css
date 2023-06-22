@@ -96,6 +96,17 @@ body {
 
 /* game board styling */
 
+.gameBoard-player-names-cont {
+   display: flex;
+   color: #000;
+   gap: 6rem;
+}
+
+.player-name-display {
+   align-self: center;
+   font-size: 2rem;
+}
+
 .gameBoard {
    display: grid;
    min-width: 300px;
