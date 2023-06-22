@@ -231,21 +231,21 @@ const initializeGame = (() => {
    const gameContainer = document.querySelector("#game-container");
    const mainContentCont = document.querySelector("#main-content-container");
 
-   const playBtnCont = document.createElement("div")
+   const startGameCont = document.createElement("div")
    const playBtn = document.createElement("button")
 
-   playBtnCont.classList.add("play-btn-container");
+  startGameCont.classList.add("start-game-container");
    playBtn.classList.add("play-btn");
 
    playBtn.textContent = "Play"
 
-   playBtnCont.appendChild(playBtn);
-   mainContentCont.appendChild(playBtnCont)
+   startGameCont.appendChild(playBtn);
+   mainContentCont.appendChild(startGameCont)
 
    playBtn.addEventListener("click", () => {
       renderGame.renderGameBoard();
       gameContainer.style.display = "flex";
-      mainContentCont.removeChild(playBtnCont)
+      mainContentCont.removeChild(startGameCont)
    });
 })()
 
