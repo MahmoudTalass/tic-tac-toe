@@ -40,7 +40,7 @@ body {
 
 /* start button styling */
 
-.play-btn-container {
+.start-game-container {
    display: block;
    width: 50%;
    margin: 6rem auto;
@@ -55,6 +55,10 @@ body {
    letter-spacing: .3rem;
    font-size: 1.8rem;
    border: none;
+}
+
+.play-btn:active {
+   background-color: #a3a1a1;
 }
 
 /* game board styling */
@@ -74,6 +78,10 @@ body {
    align-items: center;
    border: 2px solid var(--color3);
    font-size: 1.8rem;
+}
+
+.spot:active {
+   background-color: #f7f3f3fe;
 }
 
 .player1 {
