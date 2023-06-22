@@ -40,15 +40,48 @@ body {
 
 /* start button styling */
 
-.start-game-container {
-   display: block;
+.player-names-form {
+   display: flex;
    width: 50%;
    margin: 6rem auto;
+   color: #000;
+   flex-direction: column;
+   align-items: center;
+   gap: 5rem;
+}
+
+.player-name-inputs {
+   display: flex;
+   width: 80%;
+   justify-content: space-evenly;
+   gap: 3rem;
+}
+
+.input-container {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: 1rem;
+   width: 40%;
+}
+
+.player-name-input {
+   height: 2rem;
+   border: none;
+   border-bottom: 2px solid var(--color1);
+   outline: none;
+   width: 100%;
    text-align: center;
+   font-size: 1.5rem;
+   padding: 1.8rem;
+}
+
+.player-name-input::placeholder {
+   color: var(--color3);
 }
 
 .play-btn {
-   padding: 1.5rem 4rem;
+   padding: 1.2rem 3.5rem;
    background-color: var(--color3);
    border-radius: 0.8rem;
    color: var(--color2);
