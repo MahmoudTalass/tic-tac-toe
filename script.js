@@ -145,41 +145,26 @@ const endGame = (() => {
    };
 })();
 
-
-const Players = (() => {
-      let player1;
-      let player2;
-
-      function retrievePlayers(player1Name, player2Name) {
-         player1 = Player(player1Name, "X");
-         player2 = Player(player2Name, "O");
-      }
-
-      function getPlayer1() {
-         return player1;
-      }
-
-      function getPlayer2() {
-         return player2
-      }
-
-      return {
-         getPlayer1,
-         getPlayer2,
-         retrievePlayers,
-      }
-   })();
-
-
 const renderGame = (() => {
    const gameBoardContainer = document.querySelector("#gameBoard");
 
    const matchResult = document.querySelector("#match-result");
 
-   
+   const player1NameDisplay = document.querySelector("#player1-name-display");
+   const player2NameDisplay = document.querySelector("#player2-name-display");
 
-   const player1 = Players.getPlayer1;
-   const player2 = Players.getPlayer2;
+   let player1;
+   let player2;
+
+   function retrievePlayers(player1Name, player2Name) {
+      player1 = Player(player1Name, "X");
+      player2 = Player(player2Name, "O");
+   }
+
+   // player1NameDisplay.textContent = `${player1.name} (${player1.sign})`
+   // player2NameDisplay.textContent = `${player2.name} (${player2.sign})`
+
+   let a = player1;
 
    function renderGameBoard() {
       for (let i = 0; i < 9; i++) {
@@ -196,16 +181,17 @@ const renderGame = (() => {
    function renderSign(e) {
       let currentSpot = e.target;
       let currentSpotIndex = currentSpot.getAttribute("data-spot");
-      
+
       if (gameBoard.gameBoard[currentSpotIndex] !== null) return;
 
-      if (player1a.isTurn.value) {
+      if (player1.isTurn.value) {
          placeSign(currentSpot, currentSpotIndex, player1);
          currentSpot.classList.add("player1");
       } else {
          placeSign(currentSpot, currentSpotIndex, player2);
          currentSpot.classList.add("player2");
       }
+      console.log(a);
    }
 
    function placeSign(currentSpot, currentSpotIndex, player) {
@@ -250,19 +236,39 @@ const renderGame = (() => {
 
    return {
       renderGameBoard,
-      retrievePlayers: Players.retrievePlayers,
+      retrievePlayers,
    };
 })();
 
 const initializeGame = (() => {
    const gameContainer = document.querySelector("#game-container");
    const playerNameForm = document.querySelector("#player-names-form");
+   const playerNameInput = document.querySelectorAll(".player-name-input");
+   const playBtn = document.querySelector("#play-btn");
+
+   const userNamePattern = /^(\w{1,12})$/;
+
+   let isValid = false;
+
+   function validateName(inputField) {
+      if (userNamePattern.test(inputField.value)) {
+         inputField.classList.remove("invalid");
+      } else {
+         inputField.classList.add("invalid");
+      }
+   }
+
+   playerNameInput.forEach((input) => {
+      input.addEventListener("keyup", (e) => {
+         validateName(e.target);
+      });
+   });
 
    playerNameForm.addEventListener("submit", (e) => {
       e.preventDefault();
       const player1Name = document.querySelector("#player1").value;
       const player2Name = document.querySelector("#player2").value;
-      Players.retrievePlayers(player1Name, player2Name);
+      renderGame.retrievePlayers(player1Name, player2Name);
       renderGame.renderGameBoard();
       gameContainer.style.display = "flex";
       playerNameForm.style.display = "none";
