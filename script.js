@@ -145,13 +145,41 @@ const endGame = (() => {
    };
 })();
 
-const renderGame = (() => {
-   const player1 = Player("player1", "X");
-   const player2 = Player("player2", "O");
 
+const Players = (() => {
+      let player1;
+      let player2;
+
+      function retrievePlayers(player1Name, player2Name) {
+         player1 = Player(player1Name, "X");
+         player2 = Player(player2Name, "O");
+      }
+
+      function getPlayer1() {
+         return player1;
+      }
+
+      function getPlayer2() {
+         return player2
+      }
+
+      return {
+         getPlayer1,
+         getPlayer2,
+         retrievePlayers,
+      }
+   })();
+
+
+const renderGame = (() => {
    const gameBoardContainer = document.querySelector("#gameBoard");
 
    const matchResult = document.querySelector("#match-result");
+
+   
+
+   const player1 = Players.getPlayer1;
+   const player2 = Players.getPlayer2;
 
    function renderGameBoard() {
       for (let i = 0; i < 9; i++) {
@@ -168,10 +196,10 @@ const renderGame = (() => {
    function renderSign(e) {
       let currentSpot = e.target;
       let currentSpotIndex = currentSpot.getAttribute("data-spot");
-
+      
       if (gameBoard.gameBoard[currentSpotIndex] !== null) return;
 
-      if (player1.isTurn.value) {
+      if (player1a.isTurn.value) {
          placeSign(currentSpot, currentSpotIndex, player1);
          currentSpot.classList.add("player1");
       } else {
@@ -200,7 +228,7 @@ const renderGame = (() => {
          const signsOnBoard = document.getElementsByClassName("spot");
          const signsOnBoardArr = [...signsOnBoard];
 
-         const winningSpots = signsOnBoardArr.forEach((spot) => {
+         signsOnBoardArr.forEach((spot) => {
             const spotIndex = parseInt(spot.getAttribute("data-spot"));
             const match1 = spotIndex === isGameOver.winningIndices[0];
             const match2 = spotIndex === isGameOver.winningIndices[1];
@@ -208,7 +236,6 @@ const renderGame = (() => {
             spot.removeEventListener("click", renderSign);
 
             if (match1 || match2 || match3) {
-               console.log(spot);
                spot.classList.add("won");
             }
          });
@@ -223,30 +250,21 @@ const renderGame = (() => {
 
    return {
       renderGameBoard,
+      retrievePlayers: Players.retrievePlayers,
    };
 })();
 
-
 const initializeGame = (() => {
    const gameContainer = document.querySelector("#game-container");
-   const mainContentCont = document.querySelector("#main-content-container");
+   const playerNameForm = document.querySelector("#player-names-form");
 
-   const startGameCont = document.createElement("div")
-   const playBtn = document.createElement("button")
-
-  startGameCont.classList.add("start-game-container");
-   playBtn.classList.add("play-btn");
-
-   playBtn.textContent = "Play"
-
-   startGameCont.appendChild(playBtn);
-   mainContentCont.appendChild(startGameCont)
-
-   playBtn.addEventListener("click", () => {
+   playerNameForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const player1Name = document.querySelector("#player1").value;
+      const player2Name = document.querySelector("#player2").value;
+      Players.retrievePlayers(player1Name, player2Name);
       renderGame.renderGameBoard();
       gameContainer.style.display = "flex";
-      mainContentCont.removeChild(startGameCont)
+      playerNameForm.style.display = "none";
    });
-})()
-
-
+})();
