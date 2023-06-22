@@ -16,7 +16,7 @@ const gameBoard = (() => {
    };
 })();
 
-const Player = (sign) => {
+const Player = (name, sign) => {
    const playerSign = sign;
    let isTurn = { value: null };
 
@@ -34,6 +34,7 @@ const Player = (sign) => {
       sign: playerSign,
       toggleTurn,
       isTurn,
+      name,
    };
 };
 
@@ -125,11 +126,11 @@ const endGame = (() => {
 
    function tie() {
       let spotsLeft = 0;
-      gameBoard.gameBoard.forEach(spot => {
+      gameBoard.gameBoard.forEach((spot) => {
          if (spot === null) {
             spotsLeft++;
          }
-      })
+      });
 
       if (spotsLeft === 0) {
          return true;
@@ -145,8 +146,8 @@ const endGame = (() => {
 })();
 
 const renderGame = (() => {
-   const player1 = Player("X");
-   const player2 = Player("O");
+   const player1 = Player("player1", "X");
+   const player2 = Player("player2", "O");
 
    const gameBoardContainer = document.querySelector("#gameBoard");
 
@@ -190,7 +191,7 @@ const renderGame = (() => {
       }
       const tie = endGame.tie();
       if (tie) {
-         matchResult.textContent = "Tie"
+         matchResult.textContent = "Tie";
       }
    }
 
@@ -204,7 +205,7 @@ const renderGame = (() => {
             const match1 = spotIndex === isGameOver.winningIndices[0];
             const match2 = spotIndex === isGameOver.winningIndices[1];
             const match3 = spotIndex === isGameOver.winningIndices[2];
-            spot.removeEventListener('click', renderSign)
+            spot.removeEventListener("click", renderSign);
 
             if (match1 || match2 || match3) {
                console.log(spot);
@@ -212,8 +213,12 @@ const renderGame = (() => {
                return spot;
             }
          });
+         const nameOfWinner =
+            player1.sign === isGameOver.winningSign
+               ? player1.name
+               : player2.name;
 
-         matchResult.textContent = `${isGameOver.winningSign} Wins!`
+         matchResult.textContent = `${nameOfWinner} Wins!`;
       }
    }
 
