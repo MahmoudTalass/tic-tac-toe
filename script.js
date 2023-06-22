@@ -226,4 +226,27 @@ const renderGame = (() => {
    };
 })();
 
-renderGame.renderGameBoard();
+
+const initializeGame = (() => {
+   const gameContainer = document.querySelector("#game-container");
+   const mainContentCont = document.querySelector("#main-content-container");
+
+   const playBtnCont = document.createElement("div")
+   const playBtn = document.createElement("button")
+
+   playBtnCont.classList.add("play-btn-container");
+   playBtn.classList.add("play-btn");
+
+   playBtn.textContent = "Play"
+
+   playBtnCont.appendChild(playBtn);
+   mainContentCont.appendChild(playBtnCont)
+
+   playBtn.addEventListener("click", () => {
+      renderGame.renderGameBoard();
+      gameContainer.style.display = "flex";
+      mainContentCont.removeChild(playBtnCont)
+   });
+})()
+
+
