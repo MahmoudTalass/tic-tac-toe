@@ -226,6 +226,7 @@ const renderGame = (() => {
 
    function placeSign(currentSpot, currentSpotIndex, player) {
       currentSpot.textContent = player.sign;
+      currentSpot.style.fontSize = "1.8rem";
       gameBoard.gameBoard[currentSpotIndex] = player.sign;
       player1.toggleTurn();
       player2.toggleTurn();
@@ -252,7 +253,8 @@ const renderGame = (() => {
             spot.removeEventListener("click", renderSign);
 
             if (match1 || match2 || match3) {
-               spot.classList.add("won");
+               spot.classList.add("won")
+               spot.style.backgroundColor = "#00ff00FF"
             }
          });
          const nameOfWinner =
