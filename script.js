@@ -161,11 +161,6 @@ const renderGame = (() => {
       player2 = Player(player2Name, "O");
    }
 
-   // player1NameDisplay.textContent = `${player1.name} (${player1.sign})`
-   // player2NameDisplay.textContent = `${player2.name} (${player2.sign})`
-
-   let a = player1;
-
    function renderGameBoard() {
       for (let i = 0; i < 9; i++) {
          const spot = document.createElement("div");
@@ -176,6 +171,8 @@ const renderGame = (() => {
          spot.addEventListener("click", renderSign);
          gameBoardContainer.appendChild(spot);
       }
+      player1NameDisplay.textContent = `${player1.name} (${player1.sign})`;
+      player2NameDisplay.textContent = `${player2.name} (${player2.sign})`;
    }
 
    function renderSign(e) {
