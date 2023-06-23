@@ -210,6 +210,7 @@ const renderGame = (() => {
       if (isGameOver.patternWon) {
          const signsOnBoard = document.getElementsByClassName("spot");
          const signsOnBoardArr = [...signsOnBoard];
+         const restartBtn = document.querySelector("#restart-btn");
 
          signsOnBoardArr.forEach((spot) => {
             const spotIndex = parseInt(spot.getAttribute("data-spot"));
@@ -228,6 +229,7 @@ const renderGame = (() => {
                : player2.name;
 
          matchResult.textContent = `${nameOfWinner} Wins!`;
+         restartBtn.style.display = "block";
       }
    }
 
@@ -241,11 +243,8 @@ const initializeGame = (() => {
    const gameContainer = document.querySelector("#game-container");
    const playerNameForm = document.querySelector("#player-names-form");
    const playerNameInput = document.querySelectorAll(".player-name-input");
-   const playBtn = document.querySelector("#play-btn");
 
    const userNamePattern = /^(\w{1,12})$/;
-
-   let isValid = false;
 
    function validateName(inputField) {
       if (userNamePattern.test(inputField.value)) {
@@ -261,13 +260,22 @@ const initializeGame = (() => {
       });
    });
 
-   playerNameForm.addEventListener("submit", (e) => {
-      e.preventDefault();
+   function startGame() {
       const player1Name = document.querySelector("#player1").value;
       const player2Name = document.querySelector("#player2").value;
       renderGame.retrievePlayers(player1Name, player2Name);
       renderGame.renderGameBoard();
       gameContainer.style.display = "flex";
       playerNameForm.style.display = "none";
+   }
+
+   playerNameForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      startGame();
    });
 })();
+
+
+const restartGame = (() => {
+   
+}) 

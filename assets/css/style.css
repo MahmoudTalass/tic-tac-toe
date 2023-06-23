@@ -185,4 +185,5 @@ body {
    border: 3px solid var(--color4);
    background-color: transparent;
    margin-top: 1rem;
+   display: none;
 }
