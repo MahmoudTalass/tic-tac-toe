@@ -254,7 +254,7 @@ const renderGame = (() => {
 
             if (match1 || match2 || match3) {
                spot.classList.add("won")
-               spot.style.backgroundColor = "#00ff00FF"
+               spot.style.fontWeight = "700"
             }
          });
          const nameOfWinner =
