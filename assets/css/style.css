@@ -100,6 +100,15 @@ body {
 
 /* game board styling */
 
+.game-grid-container {
+   display: grid;
+   min-width: 300px;
+   width: 300px;
+   height: 300px;
+   grid-template-columns: repeat(3, 1fr);
+   grid-template-rows: repeat(3, 1fr);
+}
+
 .gameBoard-player-names-cont {
    display: flex;
    color: #000;
@@ -110,15 +119,7 @@ body {
    align-self: center;
    font-size: 2rem;
    width: 200px;
-}
-
-.gameBoard {
-   display: grid;
-   min-width: 300px;
-   width: 300px;
-   height: 300px;
-   grid-template-columns: repeat(3, 1fr);
-   grid-template-rows: repeat(3, 1fr);
+   text-align: center;
 }
 
 .spot {
@@ -126,7 +127,7 @@ body {
    justify-content: center;
    align-items: center;
    border: 2px solid var(--color3);
-   font-size: 1.8rem;
+   transition: font-size .2s linear, background-color .3s ease-out;; 
 }
 
 .spot:active {
@@ -141,9 +142,6 @@ body {
    color: var(--color5);
 }
 
-.won {
-   background-color: var(--color6);
-}
 
 .spot[data-spot="0"],
 .spot[data-spot="1"],
@@ -186,4 +184,9 @@ body {
    background-color: transparent;
    margin-top: 1rem;
    display: none;
+}
+
+.restart-btn:active {
+   background-color: var(--color4);
+   color: var(--color2)
 }
