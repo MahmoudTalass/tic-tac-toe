@@ -109,6 +109,7 @@ body {
 .player-name-display {
    align-self: center;
    font-size: 2rem;
+   width: 200px;
 }
 
 .gameBoard {
