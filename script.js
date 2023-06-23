@@ -39,6 +39,11 @@ const Player = (name, sign) => {
 };
 
 const endGame = (() => {
+   function displayRestartBtn() {
+      const restartBtn = document.querySelector("#restart-btn");
+      restartBtn.style.display = "block";
+   }
+
    function isGameOver() {
       const winPattern1 = winningPattern(
          gameBoard.gameBoard[0] === gameBoard.gameBoard[1] &&
@@ -118,6 +123,7 @@ const endGame = (() => {
       let winner = winningPatterns.filter((pattern) => pattern.patternWon);
 
       if (winner.length !== 0) {
+         displayRestartBtn();
          return winner[0];
       } else {
          return false;
@@ -133,6 +139,7 @@ const endGame = (() => {
       });
 
       if (spotsLeft === 0) {
+         displayRestartBtn();
          return true;
       } else {
          return false;
@@ -210,7 +217,6 @@ const renderGame = (() => {
       if (isGameOver.patternWon) {
          const signsOnBoard = document.getElementsByClassName("spot");
          const signsOnBoardArr = [...signsOnBoard];
-         const restartBtn = document.querySelector("#restart-btn");
 
          signsOnBoardArr.forEach((spot) => {
             const spotIndex = parseInt(spot.getAttribute("data-spot"));
@@ -275,7 +281,4 @@ const initializeGame = (() => {
    });
 })();
 
-
-const restartGame = (() => {
-   
-}) 
+const restartGame = () => {};
