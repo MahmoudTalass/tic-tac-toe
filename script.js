@@ -160,6 +160,10 @@ const renderGame = (() => {
    const player1NameDisplay = document.querySelector("#player1-name-display");
    const player2NameDisplay = document.querySelector("#player2-name-display");
 
+   const restartBtn = document.querySelector("#restart-btn");
+
+   restartBtn.addEventListener("click", restartGame);
+
    let player1;
    let player2;
 
@@ -168,15 +172,38 @@ const renderGame = (() => {
       player2 = Player(player2Name, "O");
    }
 
+   function clearGameboardArr() {
+      for(let i = 0; i < 9; i++) {
+         gameBoard.gameBoard[i] = null;
+      }
+   }
+
+   function restartGame() {
+      const gameGridContainer = document.querySelector("#game-grid-container");
+      gameBoardContainer.removeChild(gameGridContainer);
+      clearGameboardArr()
+      renderGameBoard();
+      matchResult.textContent = ""
+   }
+
+   function populateGameBoardArr() {
+      gameBoard.gameBoard.push(null);
+   }
+
    function renderGameBoard() {
+      const gameGridContainer = document.createElement("div");
+      gameGridContainer.classList.add("game-grid-container");
+      gameGridContainer.id = "game-grid-container";
+      gameBoardContainer.appendChild(gameGridContainer);
+
       for (let i = 0; i < 9; i++) {
          const spot = document.createElement("div");
          spot.textContent = "";
-         gameBoard.gameBoard.push(null);
+         populateGameBoardArr();
          spot.setAttribute("data-spot", i);
          spot.classList.add("spot");
          spot.addEventListener("click", renderSign);
-         gameBoardContainer.appendChild(spot);
+         gameGridContainer.appendChild(spot);
       }
       player1NameDisplay.textContent = `${player1.name} (${player1.sign})`;
       player2NameDisplay.textContent = `${player2.name} (${player2.sign})`;
@@ -195,7 +222,6 @@ const renderGame = (() => {
          placeSign(currentSpot, currentSpotIndex, player2);
          currentSpot.classList.add("player2");
       }
-      console.log(a);
    }
 
    function placeSign(currentSpot, currentSpotIndex, player) {
@@ -235,13 +261,14 @@ const renderGame = (() => {
                : player2.name;
 
          matchResult.textContent = `${nameOfWinner} Wins!`;
-         restartBtn.style.display = "block";
       }
    }
 
    return {
       renderGameBoard,
       retrievePlayers,
+      player1,
+      player2,
    };
 })();
 
@@ -280,5 +307,3 @@ const initializeGame = (() => {
       startGame();
    });
 })();
-
-const restartGame = () => {};
