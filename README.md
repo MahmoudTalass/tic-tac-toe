@@ -32,7 +32,4 @@ The project is based on "Project: Tic Tac Toe" from The Odin Project curriculum.
 
 - [Project: Tic Tac Toe](https://www.theodinproject.com/lessons/node-path-javascript-tic-tac-toe)
 
-## Conclusion
-
-The Tic Tac Toe web project provides an interactive and engaging gaming experience. With its player name input, turn-based gameplay, win conditions, and replay option, it offers a complete Tic Tac Toe experience on the web. The project demonstrates the use of HTML, CSS, and JavaScript to create an enjoyable user interface and implement game logic.
 
