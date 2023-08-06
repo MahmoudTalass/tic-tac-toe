@@ -173,7 +173,7 @@ const renderGame = (() => {
    }
 
    function clearGameboardArr() {
-      for(let i = 0; i < 9; i++) {
+      for (let i = 0; i < 9; i++) {
          gameBoard.gameBoard[i] = null;
       }
    }
@@ -181,9 +181,9 @@ const renderGame = (() => {
    function restartGame() {
       const gameGridContainer = document.querySelector("#game-grid-container");
       gameBoardContainer.removeChild(gameGridContainer);
-      clearGameboardArr()
+      clearGameboardArr();
       renderGameBoard();
-      matchResult.textContent = ""
+      matchResult.textContent = "";
    }
 
    function populateGameBoardArr() {
@@ -230,6 +230,8 @@ const renderGame = (() => {
       gameBoard.gameBoard[currentSpotIndex] = player.sign;
       player1.toggleTurn();
       player2.toggleTurn();
+      debugger;
+
       const isGameOver = endGame.isGameOver();
       if (isGameOver !== false) {
          announceWinner(isGameOver);
@@ -253,8 +255,8 @@ const renderGame = (() => {
             spot.removeEventListener("click", renderSign);
 
             if (match1 || match2 || match3) {
-               spot.classList.add("won")
-               spot.style.fontWeight = "700"
+               spot.classList.add("won");
+               spot.style.fontWeight = "700";
             }
          });
          const nameOfWinner =
