@@ -230,7 +230,6 @@ const renderGame = (() => {
       gameBoard.gameBoard[currentSpotIndex] = player.sign;
       player1.toggleTurn();
       player2.toggleTurn();
-      debugger;
 
       const isGameOver = endGame.isGameOver();
       if (isGameOver !== false) {
